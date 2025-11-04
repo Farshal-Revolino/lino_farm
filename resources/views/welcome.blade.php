@@ -82,18 +82,52 @@
   <!-- Navbar -->
   <nav class="fixed w-full z-20 backdrop-blur-md bg-black/50 border-b border-gray-700">
     <div class="max-w-7xl mx-auto px-6 py-3 flex justify-between items-center">
+      <!-- Logo -->
       <h1 class="text-2xl font-bold text-yellow-400">🐄 LINO FARM</h1>
-      <div class="space-x-6 hidden md:flex">
+
+      <!-- Desktop Menu -->
+      <div class="hidden md:flex space-x-6">
         <a href="#about" class="hover:text-yellow-400 transition">Tentang</a>
         <a href="#services" class="hover:text-yellow-400 transition">Fitur</a>
         <a href="#cows" class="hover:text-yellow-400 transition">Daftar Sapi</a>
         <a href="#contact" class="hover:text-yellow-400 transition">Kontak</a>
         <a href="{{ route('galeri') }}" class="hover:text-yellow-400 transition">Galeri Kami</a>
+      </div>
 
+      <!-- Mobile Menu Button -->
+      <button id="mobile-menu-button" class="md:hidden text-green-400 focus:outline-none">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+    </div>
 
-
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="md:hidden hidden bg-transparant/80 backdrop-blur-md border-t border-gray-700">
+      <div class="px-6 py-4 space-y-4">
+        <a href="#about" class="block text-white hover:text-yellow-400 transition">Tentang</a>
+        <a href="#services" class="block text-white hover:text-yellow-400 transition">Fitur</a>
+        <a href="#cows" class="block text-white hover:text-yellow-400 transition">Daftar Sapi</a>
+        <a href="#contact" class="block text-white hover:text-yellow-400 transition">Kontak</a>
+        <a href="{{ route('galeri') }}" class="block text-white hover:text-yellow-400 transition">Galeri Kami</a>
       </div>
     </div>
+  </nav>
+
+  <!-- JavaScript for Mobile Menu Toggle -->
+  <script>
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    mobileMenuButton.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+  </script>
+
+
+
+  </div>
+  </div>
   </nav>
 
   <!-- Hero Section -->
@@ -225,6 +259,8 @@
       });
     @endif
   </script>
+
+  <script src="{{ asset('js/navbar.js') }}"></script>
 
 </body>
 
