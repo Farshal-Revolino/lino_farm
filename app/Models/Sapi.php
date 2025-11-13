@@ -9,7 +9,17 @@ class Sapi extends Model
 {
     use HasFactory;
 
+    // Menentukan nama tabel secara eksplisit (bagus)
     protected $table = 'sapi';
-    protected $fillable = ['nama', 'jenis', 'umur', 'berat', 'harga', 'gambar'];
-}
 
+    // Daftar kolom yang diizinkan untuk diisi (Mass Assignment)
+    protected $fillable = [
+        'nama', 
+        'jenis', 
+        'umur', 
+        'berat', 
+        'harga', 
+        'gambar',
+        'sapistock' // <-- WAJIB: Untuk status Ready/Terjual
+    ];
+}

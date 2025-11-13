@@ -92,6 +92,7 @@
         <a href="#cows" class="hover:text-yellow-400 transition">Daftar Sapi</a>
         <a href="#contact" class="hover:text-yellow-400 transition">Kontak</a>
         <a href="{{ route('galeri') }}" class="hover:text-yellow-400 transition">Galeri Kami</a>
+        <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">Login</a></li>
       </div>
 
       <!-- Mobile Menu Button -->
@@ -110,6 +111,7 @@
         <a href="#cows" class="block text-white hover:text-yellow-400 transition">Daftar Sapi</a>
         <a href="#contact" class="block text-white hover:text-yellow-400 transition">Kontak</a>
         <a href="{{ route('galeri') }}" class="block text-white hover:text-yellow-400 transition">Galeri Kami</a>
+        <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">Login</a></li>
       </div>
     </div>
   </nav>
@@ -181,13 +183,28 @@
 
   <!-- Daftar Sapi (Dinamis dari Database) -->
   <section id="cows" class="py-20 px-6 bg-gradient-to-b from-black via-gray-900 to-black text-center">
-    <h3 class="text-3xl font-bold mb-12 text-yellow-400">Daftar Sapi Yang Tersedia </h3>
+    <h3 class="text-3xl font-bold mb-12 text-yellow-400">Daftar Sapi Yang Tersedia</h3>
 
     <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
       @foreach($sapi as $item)
-        <div class="card p-6 rounded-2xl text-left" data-aos="fade-up">
-          <img src="{{ asset('img/' . $item->gambar) }}" alt="{{ $item->nama }}"
-            class="rounded-xl mb-4 w-full h-56 object-cover">
+        <div class="card relative p-6 rounded-2xl text-left overflow-hidden group" data-aos="fade-up">
+
+          <!-- Gambar sapi -->
+          <div class="relative mb-4">
+            <img src="{{ asset('storage/' . $item->gambar) }}" alt="{{ $item->nama }}"
+              class="rounded-xl w-full h-56 object-cover">
+
+            <!-- Overlay SOLD OUT -->
+            @if($item->sapistock === 'terjual')
+              <div class="absolute inset-0 bg-black/60 flex items-center justify-center rounded-xl">
+                <span class="text-white text-2xl font-bold bg-red-600 px-5 py-2 rounded-lg shadow-lg animate-pulse">
+                  SOLD OUT
+                </span>
+              </div>
+            @endif
+          </div>
+
+          <!-- Info sapi -->
           <h4 class="text-xl font-bold text-yellow-400">{{ $item->nama }}</h4>
           <p class="text-gray-300">Berat: {{ $item->berat }}kg | Umur: {{ $item->umur }} tahun</p>
           <p class="text-yellow-400 font-bold mt-2">Rp {{ number_format($item->harga, 0, ',', '.') }}</p>
@@ -195,6 +212,7 @@
       @endforeach
     </div>
   </section>
+
 
 
   <!-- Kontak -->
